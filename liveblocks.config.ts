@@ -4,7 +4,7 @@ import { createRoomContext } from "@liveblocks/react";
 const client = createClient({
   publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!,
   // authEndpoint: "/api/auth",
-  // throttle: 100,
+  throttle: 16,
 });
 
 // Presence represents the properties that exist on every user in the Room
@@ -42,9 +42,11 @@ type RoomEvent = {
 // Optionally, when using Comments, ThreadMetadata represents metadata on
 // each thread. Can only contain booleans, strings, and numbers.
 export type ThreadMetadata = {
-  // resolved: boolean;
-  // quote: string;
-  // time: number;
+  resolved: boolean;
+  zIndex: number;
+  time?: number;
+  x: number;
+  y: number;
 };
 
 export const {
