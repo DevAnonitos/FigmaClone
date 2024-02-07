@@ -1,9 +1,5 @@
-import Image from "next/image";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      NextjsProject
-    </main>
-  );
-};
+const App = dynamic(() => import("./App"), { ssr: false });
+
+export default App;
