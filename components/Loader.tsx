@@ -10,9 +10,10 @@ const Loader = () => {
     >
       <Image
         src='/assets/loader.gif'
-        alt='loader'
+        alt='Loading Spinner'
         width={100}
         height={100}
+        priority={true}
         className='object-contain'
       />
       <p className='flex items-center justify-center text-sm font-bold text-primary-grey-300'>
