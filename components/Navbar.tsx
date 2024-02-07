@@ -1,6 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { memo } from 'react';
+import Image from 'next/image';
+import { Button } from './ui/button';
+import { ShapesMenu } from '.';
+import { navElements } from '@/constants';
+
+
 
 const Navbar = () => {
   return (
