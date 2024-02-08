@@ -7,6 +7,7 @@ import  ShapesMenu from './ShapesMenu';
 import { navElements } from '@/constants';
 
 import { NavbarProps, ActiveElement } from '@/types/type';
+import ActiveUsers from './users/ActiveUsers';
 
 
 const Navbar = ({ 
@@ -47,6 +48,14 @@ const Navbar = ({
                 </>
               ): item?.value === "comments" ? (
                 <>
+                  <Button className='relative w-5 h-5 object-contain'>
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      fill
+                      className={isActive(item.value) ? "invert": ""}
+                    />
+                  </Button>
                 </>
               ): (
                 <>
@@ -63,6 +72,7 @@ const Navbar = ({
             </li>
           ))}
         </ul>
+        <ActiveUsers />
       </nav>
     </>
   );
