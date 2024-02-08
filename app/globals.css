@@ -24,6 +24,6 @@
   }
 
   .right-menu-item {
-    @apply flex justify-between px-3 py-2 hover:bg-primary-grey-200 !important;
+    @apply flex justify-between px-3 py-2 transition-all duration-150 ease-in-out hover:bg-primary-grey-200 !important;
   }
 }
