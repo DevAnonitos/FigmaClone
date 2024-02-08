@@ -1,6 +1,12 @@
 "use client";
 
 import React from 'react';
+import { 
+  Color, 
+  Dimensions, 
+  Text, 
+  Export 
+} from './settings';
 
 const RightSidebar = () => {
 
@@ -20,6 +26,15 @@ const RightSidebar = () => {
         >
         Make changes to canvas as you like
         </span>
+
+        <Dimensions />
+
+        <Text />
+        
+        <Color />
+        <Color />
+
+        <Export />
       </section>
     </>
   );

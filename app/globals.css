@@ -16,7 +16,7 @@
   }
 
   .input-ring {
-    @apply h-8 rounded-none border-none  bg-transparent outline-none ring-offset-0 focus:ring-1  focus:ring-primary-green focus:ring-offset-0 focus-visible:ring-offset-0 !important;
+    @apply h-8 rounded-lg border-none bg-transparent outline-none ring-offset-0 focus:ring-1  focus:ring-primary-green focus:ring-offset-0 focus-visible:ring-offset-0 !important;
   }
 
   .right-menu-content {
