@@ -20,7 +20,7 @@
   }
 
   .right-menu-content {
-    @apply flex w-80 flex-col gap-y-1 border-none bg-primary-black py-4 text-white !important;
+    @apply flex w-80 flex-col gap-y-1 border-[1px] border-gray-700 bg-primary-black py-4 text-white !important;
   }
 
   .right-menu-item {

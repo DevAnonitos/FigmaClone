@@ -31,7 +31,7 @@ const Navbar = ({
                 if(Array.isArray(item.value)) return;
                 handleActiveElement(item)
               }}
-              className={`group px-2.5 py-5 flex justify-center items-center  
+              className={`group px-2.5 py-5 flex justify-center items-center 
                 ${isActive(item.value) ? "bg-primary-green" : "hover:bg-primary-grey-200"}
               `}
             >
