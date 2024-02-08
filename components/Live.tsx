@@ -15,6 +15,7 @@ import {
   useMyPresence, 
   useOthers 
 } from '@/liveblocks.config';
+import LiveCursors from './cursor/LiveCursors';
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
@@ -23,6 +24,9 @@ type Props = {
 }
 
 const Live = ({ canvasRef, undo, redo }: Props) => {
+
+  const others = useOthers();
+
   return (
     <>
       <ContextMenu>
@@ -31,6 +35,9 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
           id='canvas'
         >
           <canvas ref={canvasRef} />
+
+          {/* Cursor live */}
+          <LiveCursors others={others} />
         </ContextMenuTrigger>
 
         <ContextMenuContent className='right-menu-content'>
