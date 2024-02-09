@@ -16,6 +16,8 @@ import {
   useOthers 
 } from '@/liveblocks.config';
 import LiveCursors from './cursor/LiveCursors';
+import { Reaction, CursorMode, CursorState, ReactionEvent } from '../types/type';
+import useInterval from '@/hooks/useInterval';
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
@@ -26,6 +28,22 @@ type Props = {
 const Live = ({ canvasRef, undo, redo }: Props) => {
 
   const others = useOthers();
+  const [{cursor}, updateMyPresence] = useMyPresence() as any;
+
+  const broadcast = useBroadcastEvent();
+
+  const [reactions, setReactions] = useState<Reaction[]>([]);
+  const [cursorState, setCursorState] = useState<CursorState>({
+    mode: CursorMode.Hidden,
+  });
+
+  const setReaction = useCallback((reaction: string) => {
+    setCursorState({ mode: CursorMode.Reaction, reaction, isPressed: false });
+  },[]);
+
+  useInterval(() => {
+    setReactions((reactions) => reactions.filter((reaction) => reaction.timestamp > Date.now() - 4000));
+  }, 1000);
 
   return (
     <>
