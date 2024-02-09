@@ -116,7 +116,15 @@ const Text = ({
             handleInputChange,
           })}
           <div className='flex gap-2'>
-            
+            {selectConfigs.slice(1).map((config) =>
+              RenderSelect({
+                config,
+                fontSize,
+                fontWeight,
+                fontFamily,
+                handleInputChange,
+              })
+            )}
           </div>
         </div>
       </div>
