@@ -13,6 +13,7 @@ import {
   SelectValue 
 } from '../ui/select';
 
+// Text Props
 type TextProps = {
   fontFamily: string;
   fontSize: string;
@@ -20,11 +21,84 @@ type TextProps = {
   handleInputChange: (property: string, value: string) => void;
 };
 
+type RenderSelectProps = {
+  config: {
+    property: string;
+    placeholder: string;
+    options: { label: string, value: string }[];
+  };
+  fontSize: string;
+  fontWeight: string;
+  fontFamily: string;
+  handleInputChange: (property: string, value: string) => void;
+};
+
+const selectConfigs = [
+  {
+    property: "fontFamily",
+    placeholder: "Choose a font",
+    options: fontFamilyOptions,
+  },
+  { property: "fontSize", placeholder: "30", options: fontSizeOptions },
+  {
+    property: "fontWeight",
+    placeholder: "Semibold",
+    options: fontWeightOptions,
+  },
+];
+
+const RenderSelect = ({ 
+  config, 
+  fontSize, 
+  fontWeight, 
+  fontFamily, 
+  handleInputChange 
+}: RenderSelectProps) => {
+  return (
+    <>
+      <Select
+        key={config.property}
+        onValueChange={(value) => handleInputChange(config.property, value)}
+        value={
+          config.property === "fontFamily"
+            ? fontFamily
+            : config.property === "fontSize"
+              ? fontSize
+              : fontWeight
+        }
+      >
+        <SelectTrigger className='no-ring w-full rounded-sm border-[1px] border-gray-700'>
+          <SelectValue
+            placeholder={
+              config.property === "fontFamily"
+                ? "Choose a font"
+                : config.property === "fontSize"
+                  ? "30"
+                  : "Semibold"
+            }
+          />
+        </SelectTrigger>
+        <SelectContent className='border-gray-700 bg-primary-black text-primary-grey-300'>
+          {config.options.map((option) => (
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              className=' hover:bg-primary-green hover:text-primary-black cursor-pointer'
+            >
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </>
+  );
+};
+
 const Text = ({ 
   fontFamily, 
   fontSize, 
   fontWeight, 
-  handleInputChange 
+  handleInputChange, 
 }: TextProps) => {
   return (
     <>
@@ -34,11 +108,16 @@ const Text = ({
         </h3>
 
         <div className='flex flex-col gap-3'>
-
-        </div>
-
-        <div className='flex gap-2'>
-
+          {RenderSelect({
+            config: selectConfigs[0],
+            fontSize,
+            fontWeight,
+            fontFamily,
+            handleInputChange,
+          })}
+          <div className='flex gap-2'>
+            
+          </div>
         </div>
       </div>
     </>
