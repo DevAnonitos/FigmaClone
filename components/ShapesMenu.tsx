@@ -40,7 +40,7 @@ const ShapesMenu = ({
         </DropdownMenuTrigger>
         
         <DropdownMenuContent 
-          className='mt-5 flex flex-col gap-y-1 border-none 
+          className='mt-5 flex flex-col gap-y-1 border-[1px] border-gray-700
           bg-primary-black text-white'
         >
           {item.value.map((elem) => (
