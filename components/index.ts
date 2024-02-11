@@ -1,4 +1,3 @@
-import Loader from "./Loader";
 import Navbar from "./Navbar";
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
@@ -7,7 +6,7 @@ import LiveCursors from "./cursor/LiveCursors";
 import ReactionSelector from "./reaction/ReactionButton";
 
 export {
-  Loader,
+  ReactionSelector,
   Navbar,
   LeftSidebar,
   RightSidebar,

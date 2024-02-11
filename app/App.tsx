@@ -46,11 +46,14 @@ const Home = () => {
   return (
     <>
       <main className='h-screen overflow-hidden'>
-        <Navbar />
+        <Navbar 
+          imageInputRef={imageInputRef}
+          activeElement={activeElement}
+        />
         <section className='flex h-full flex-row'>
           <LeftSidebar />
 
-          <Live />
+          <Live canvasRef={canvasRef} undo={undo} redo={redo} />
 
           <RightSidebar />
         </section>
