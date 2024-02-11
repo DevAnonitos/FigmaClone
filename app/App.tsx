@@ -1,10 +1,48 @@
 "use client";
 
+import React, { useState, useRef, useEffect } from 'react';
 import Live from '@/components/Live';
+import { fabric } from "fabric";
+import { useMutation, useRedo, useStorage, useUndo } from '@/liveblocks.config';
 import { LeftSidebar, Navbar, RightSidebar } from '@/components/index';
-import React from 'react';
+
+// Type || libs
+import { defaultNavElement } from '@/constants';
+import { ActiveElement, Attributes } from '@/types/type';
 
 const Home = () => {
+
+  const undo = useUndo();
+  const redo = useRedo();
+
+  const canvasObjects = useStorage((root) => root.canvasObjects);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  const fabricRef = useRef<fabric.Canvas | null>(null);
+  const isDrawing = useRef(false);
+  const selectedShapeRef = useRef<string | null>(null);
+
+  const activeObjectRef = useRef<fabric.Object | null>(null);
+  const isEditingRef = useRef(false);
+
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const [activeElement, setActiveElement] = useState<ActiveElement>({
+    name: "",
+    value: "",
+    icon: "",
+  });
+  const [elementAtributes, setElementAtributes] = useState<Attributes>({
+    width: "",
+    height: "",
+    fontSize: "",
+    fontFamily: "",
+    fontWeight: "",
+    fill: "#aabbcc",
+    stroke: "#aabbcc",
+  });
+
+
   return (
     <>
       <main className='h-screen overflow-hidden'>
