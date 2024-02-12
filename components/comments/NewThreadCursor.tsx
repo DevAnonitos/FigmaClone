@@ -1,8 +1,16 @@
-import React from 'react';
+"use client";
 
-const NewThreadCursor = () => {
+import React, { useEffect, useState } from 'react';
+import * as Portal from "@radix-ui/react-portal";
+
+
+const NewThreadCursor = ({ display }: { display: boolean }) => {
   return (
-    <div>NewThreadCursor</div>
+    <>
+      <Portal.Root>
+        
+      </Portal.Root>
+    </>
   );
 };
 
