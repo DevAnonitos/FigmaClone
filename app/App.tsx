@@ -32,7 +32,7 @@ const Home = () => {
     value: "",
     icon: "",
   });
-  const [elementAtributes, setElementAtributes] = useState<Attributes>({
+  const [elementAttributes, setElementAttributes] = useState<Attributes>({
     width: "",
     height: "",
     fontSize: "",
@@ -42,6 +42,23 @@ const Home = () => {
     stroke: "#aabbcc",
   });
 
+  const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {
+
+    const canvasObjects = storage.get("canvasObjects");
+    canvasObjects.delete(shapeId);
+  }, []);
+
+  const deleteAllShapes = useMutation(({ storage}) => {
+    const canvasObjects = storage.get("canvasObjects");
+
+    if(!canvasObjects || canvasObjects.size === 0) return true;
+
+    for (const [key, value] of canvasObjects.entries()) {
+      canvasObjects.delete(key);
+    }
+    
+    return canvasObjects.size === 0;
+  }, [])
 
   return (
     <>
