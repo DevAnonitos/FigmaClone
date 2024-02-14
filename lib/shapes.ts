@@ -8,27 +8,27 @@ import {
   ModifyShape 
 } from "@/types/type";
 
-export const createRectangle = () => {
+export const createRectangle = (pointer: PointerEvent) => {
 
 };
 
-export const createTriangle = () => {
+export const createTriangle = (pointer: PointerEvent) => {
 
 };
 
-export const createCircle = () => {
+export const createCircle = (pointer: PointerEvent) => {
 
 };
 
-export const createLine = () => {
+export const createLine = (pointer: PointerEvent) => {
 
 };
 
-export const createText = () => {
+export const createText = (pointer: PointerEvent, text: string) => {
 
 };
 
-export const createSpecificShape = () => {
+export const createSpecificShape = (shapeType: string, pointer: PointerEvent) => {
 
 };
 
@@ -36,15 +36,30 @@ export const handleImageUpload = () => {
 
 };
 
-export const createShape = () => {
+export const createShape = ({ 
+  file,
+  canvas,
+  shapeRef,
+  syncShapeInStorage,
+}: ImageUpload) => {
 
 };
 
-export const modifyShape = () => {
+export const modifyShape = ({ 
+  canvas,
+  property,
+  value,
+  activeObjectRef,
+  syncShapeInStorage,
+}: ModifyShape) => {
 
 };
 
-export const bringElement = () => {
-
+export const bringElement = ({ 
+  canvas,
+  direction,
+  syncShapeInStorage
+}: ElementDirection) => {
+  
 };
 
