@@ -10,6 +10,8 @@ import { LeftSidebar, Navbar, RightSidebar } from '@/components/index';
 import { defaultNavElement } from '@/constants';
 import { ActiveElement, Attributes } from '@/types/type';
 
+import { handleDelete, handleKeyDown } from '@/lib/key-events';
+
 const Home = () => {
 
   const undo = useUndo();
@@ -58,8 +60,22 @@ const Home = () => {
     }
     
     return canvasObjects.size === 0;
-  }, [])
+  }, []);
 
+  const syncShapeInStorage = useMutation(({ storage }, object) => {
+    if(!object) return;
+
+    const { objectId } = object;
+
+    const shapeData = object.toJSON();
+    shapeData.object = objectId;
+
+    const canvasObjects = storage.get("canvasObjects");
+
+    canvasObjects.set(objectId, shapeData);
+  }, []);
+
+  
   return (
     <>
       <main className='h-screen overflow-hidden'>
