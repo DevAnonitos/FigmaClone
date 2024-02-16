@@ -4,21 +4,29 @@ import { v4 as uuidv4 } from "uuid";
 import { CustomFabricObject } from "@/types/type";
 
 export const handleCopy = (canvas: fabric.Canvas) => {
+  const activeObjects = canvas.getActiveObjects();
 
+  if(activeObjects.length > 0) {
+    const serializeObjects = activeObjects.map((obj) => obj.toObject());
+
+    localStorage.setItem("clipboard", JSON.stringify(serializeObjects));
+  }
+
+  return activeObjects;
 };
 
 export const handlePaste = (
   canvas: fabric.Canvas, 
-  syncShapeInStorage: (shape: fabric.Object) => void
+  syncShapeInStorage: (shape: fabric.Object) => void,
 ) => {
-
+  
 
 };
 
 
 export const handleDelete = (
   canvas: fabric.Canvas, 
-  deleteShapeFromStorage: (id: string) => void
+  deleteShapeFromStorage: (id: string) => void,
 ) => {
 
 };
@@ -36,7 +44,7 @@ export const handleKeyDown = ({
   undo: () => void,
   redo: () => void,
   syncShapeInStorage: (shape: fabric.Object) => void,
-  deleteShapeFromStorage: (id: string) => void
+  deleteShapeFromStorage: (id: string) => void,
 }) => {
 
 };
