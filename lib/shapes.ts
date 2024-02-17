@@ -74,20 +74,67 @@ export const createText = (pointer: PointerEvent, text: string) => {
 };
 
 export const createSpecificShape = (shapeType: string, pointer: PointerEvent) => {
+  switch (shapeType){
+    case "rectangle":
+      return createTriangle(pointer);
+    
+    case "triangle":
+      return createTriangle(pointer);
+    
+    case "circle":
+      return createCircle(pointer);
 
+    case "line":
+      return createLine(pointer);
+
+    case "text":
+      return createText(pointer, "Tap to Type");
+
+    default:
+      return null;
+  }
 };
 
-export const handleImageUpload = () => {
-
-};
-
-export const createShape = ({ 
+export const handleImageUpload = ({
   file,
   canvas,
   shapeRef,
   syncShapeInStorage,
 }: ImageUpload) => {
+  const reader = new FileReader();
 
+  reader.onload = () => {
+    fabric.Image.fromURL(reader.result as string, (img) => {
+      img.scaleToWidth(200);
+      img.scaleToHeight(200);
+
+      canvas.current.add(img);
+
+      // @ts-ignore
+      img.objectId = uuidv4();
+
+      shapeRef.current = img;
+
+      syncShapeInStorage(img);
+      canvas.current.requestRenderAll();
+    });
+  };
+
+  reader.readAsDataURL(file);
+};
+
+
+export const createShape = (
+  canvas: fabric.Canvas,
+  pointer: PointerEvent,
+  shapeType: string,
+) => {
+  if(shapeType === "freeform"){
+    canvas.isDrawingMode = true;
+    return null;
+  }
+
+  return createSpecificShape(shapeType, pointer);
 };
 
 export const modifyShape = ({ 
@@ -97,7 +144,26 @@ export const modifyShape = ({
   activeObjectRef,
   syncShapeInStorage,
 }: ModifyShape) => {
+  const selectedElement = canvas.getActiveObject();
 
+  if (!selectedElement || selectedElement?.type === "activeSelection") return;
+
+  
+  if (property === "width") {
+    selectedElement.set("scaleX", 1);
+    selectedElement.set("width", value);  
+  } else if (property === "height") {
+    selectedElement.set("scaleY", 1);
+    selectedElement.set("height", value);
+  } else {
+    if (selectedElement[property as keyof object] === value) return;
+    selectedElement.set(property as keyof object, value);
+  }
+
+  
+  activeObjectRef.current = selectedElement;
+
+  syncShapeInStorage(selectedElement);
 };
 
 export const bringElement = ({ 
@@ -105,6 +171,19 @@ export const bringElement = ({
   direction,
   syncShapeInStorage
 }: ElementDirection) => {
-  
+  if (!canvas) return;
+
+  const selectedElement = canvas.getActiveObject();
+
+  if (!selectedElement || selectedElement?.type === "activeSelection") return;
+
+  if (direction === "front") {
+    canvas.bringToFront(selectedElement);
+  } else if (direction === "back") {
+    canvas.sendToBack(selectedElement);
+  }
+
+  // canvas.renderAll();
+  syncShapeInStorage(selectedElement);
 };
 
