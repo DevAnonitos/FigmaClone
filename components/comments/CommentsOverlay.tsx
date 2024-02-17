@@ -18,9 +18,16 @@ type OverplayThreadProps = {
 };
 
 const overlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
+
   return (
     <>
-      <div>
+      <div 
+        className='absolute left-0 top-0 flex gap-5' 
+        id={`thread-${thread.id}`}
+        style={{
+          transform: `translate(${thread.metadata.x})px, ${thread.metadata.y}px`,
+        }}
+      >
         
       </div>
     </>
@@ -33,7 +40,9 @@ const CommentsOverlay = () => {
   const maxIndex = useMaxIndex();
   
   return (
-    <div>CommentsOverlay</div>
+    <div>
+      
+    </div>
   );
 };
 

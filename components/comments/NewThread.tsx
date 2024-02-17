@@ -18,16 +18,44 @@ import { useMaxIndex } from '@/lib/useMaxZIndex';
 import PinnedComposer from './PinnedComposer';
 import NewThreadCursor from './NewThreadCursor';
 
+type ComposerCoords = null | { x: number; y: number};
+
 type Props = {
   children: ReactNode;
 };  
 
 const NewThread = ({ children }: Props) => {
+
+  const [creatingCommentState, setCreatingCommentState] = useState< "placing" | "placed" | "complete" >("complete");
+
+  const createThread = useCreateThread();
+
+  const maxZIndex = useMaxIndex();
+
+  const [composerCoords, setComposerCoords] = useState<ComposerCoords>(null);
+
+  const lastPointerEvent = useRef<PointerEvent>();
+
+
+
   return (
     <>
       <Slot>
         {children}
       </Slot>
+      {composerCoords ? (
+        <>
+          <Portal.Root 
+            className='absolute left-0 top-0' 
+            data-hide-cursors
+            style={{
+              transform: `translate(${composerCoords.x}px, ${composerCoords.y}px)`
+            }}
+          >
+
+          </Portal.Root>
+        </>
+      ) : null}
     </>
   );
 };
