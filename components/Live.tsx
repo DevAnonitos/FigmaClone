@@ -10,12 +10,17 @@ import {
 } from './ui/context-menu';
 
 import { 
+  Cursor, 
+  CursorChat, 
+  LiveCursors 
+} from './cursor';
+
+import { 
   useBroadcastEvent, 
   useEventListener, 
   useMyPresence, 
-  useOthers 
+  useOthers, 
 } from '@/liveblocks.config';
-import LiveCursors from './cursor/LiveCursors';
 import { Reaction, CursorMode, CursorState, ReactionEvent } from '../types/type';
 import useInterval from '@/hooks/useInterval';
 
