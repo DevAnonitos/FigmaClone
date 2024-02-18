@@ -23,12 +23,14 @@ import {
 } from '@/liveblocks.config';
 import { Reaction, CursorMode, CursorState, ReactionEvent } from '../types/type';
 import useInterval from '@/hooks/useInterval';
+import FlyingReaction from './reaction/FlyingReaction';
+import ReactionSelector from './reaction/ReactionButton';
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
   undo: () => void;
   redo: () => void;
-}
+};
 
 const Live = ({ canvasRef, undo, redo }: Props) => {
 
@@ -60,6 +62,33 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
           <canvas ref={canvasRef} />
 
           {/* Cursor live */}
+          {reactions.map((reaction) => (
+            <FlyingReaction 
+              key={reaction.timestamp.toString()}
+              x={reaction.point.x}
+              y={reaction.point.y}
+              timestamp={reaction.timestamp}
+              value={reaction.value}
+            />
+          ))}
+
+          {cursor && (
+            <CursorChat
+              cursor={cursor}
+              cursorState={cursorState}
+              setCursorState={setCursorState}
+              updateMyPresence={updateMyPresence}
+            />
+          )}
+
+          {cursorState.mode === CursorMode.ReactionSelector && (
+            <ReactionSelector
+              setReaction={(reaction) => {
+                setReaction(reaction);
+              }}
+            />
+          )}
+
           <LiveCursors others={others} />
         </ContextMenuTrigger>
 
