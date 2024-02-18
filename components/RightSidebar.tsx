@@ -45,32 +45,32 @@ const RightSidebar = ({
       </span>
 
       <Dimensions 
-        isEditingRef={isEditingRef}
-        width={elementAttributes.width}
-        height={elementAttributes.height}
-        handleInputChange={handleInputChange}
+        // isEditingRef={isEditingRef}
+        // width={elementAttributes.width}
+        // height={elementAttributes.height}
+        // handleInputChange={handleInputChange}
       />
 
       <Text
-        fontFamily={elementAttributes.fontFamily}
-        fontSize={elementAttributes.fontSize}
-        fontWeight={elementAttributes.fontWeight}
-        handleInputChange={handleInputChange}
+        // fontFamily={elementAttributes.fontFamily}
+        // fontSize={elementAttributes.fontSize}
+        // fontWeight={elementAttributes.fontWeight}
+        // handleInputChange={handleInputChange}
       />
         
       <Color
-        inputRef={colorInputRef}
-        attribute={elementAttributes.fill}
-        placeholder='color'
-        attributeType='fill'
-        handleInputChange={handleInputChange}
+        // inputRef={colorInputRef}
+        // attribute={elementAttributes.fill}
+        // placeholder='color'
+        // attributeType='fill'
+        // handleInputChange={handleInputChange}
       />
       <Color
-        inputRef={colorInputRef}
-        attribute={elementAttributes.stroke}
-        placeholder='stroke'
-        attributeType='stroke'
-        handleInputChange={handleInputChange}
+        // inputRef={colorInputRef}
+        // attribute={elementAttributes.stroke}
+        // placeholder='stroke'
+        // attributeType='stroke'
+        // handleInputChange={handleInputChange}
       />
 
       <Export />
