@@ -21,7 +21,12 @@ import {
   useMyPresence, 
   useOthers, 
 } from '@/liveblocks.config';
-import { Reaction, CursorMode, CursorState, ReactionEvent } from '../types/type';
+import { 
+  Reaction, 
+  CursorMode, 
+  CursorState, 
+  ReactionEvent, 
+} from '../types/type';
 import useInterval from '@/hooks/useInterval';
 import FlyingReaction from './reaction/FlyingReaction';
 import ReactionSelector from './reaction/ReactionButton';
@@ -95,7 +100,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         <ContextMenuContent className='right-menu-content'>
           {shortcuts.map((item) => (
             <ContextMenuItem key={item.key} className='right-menu-item cursor-pointer'>
-              <p>{item.name}</p>
+              <p className='text-bold'>{item.name}</p>
               <p className='text-xs text-primary-grey-300'>{item.shortcut}</p>
             </ContextMenuItem>
           ))}
