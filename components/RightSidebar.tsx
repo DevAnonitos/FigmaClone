@@ -23,7 +23,7 @@ const RightSidebar = ({
   const colorInputRef = useRef(null);
   const strokeInputRef = useRef(null);
 
-  const handleInputChange = (property: string, value: strinq) => {
+  const handleInputChange = (property: string, value: string) => {
 
   };
 
