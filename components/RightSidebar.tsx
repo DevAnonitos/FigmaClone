@@ -20,6 +20,13 @@ const RightSidebar = ({
   syncShapeInStorage,
 }: RightSidebarProps) => {
 
+  const colorInputRef = useRef(null);
+  const strokeInputRef = useRef(null);
+
+  const handleInputChange = (property: string, value: strinq) => {
+
+  };
+
   const memoizedContent = useMemo(() => (
     
     <section 
@@ -37,12 +44,34 @@ const RightSidebar = ({
         Make changes to canvas as you like
       </span>
 
-      <Dimensions />
+      <Dimensions 
+        isEditingRef={isEditingRef}
+        width={elementAttributes.width}
+        height={elementAttributes.height}
+        handleInputChange={handleInputChange}
+      />
 
-      <Text />
+      <Text
+        fontFamily={elementAttributes.fontFamily}
+        fontSize={elementAttributes.fontSize}
+        fontWeight={elementAttributes.fontWeight}
+        handleInputChange={handleInputChange}
+      />
         
-      <Color />
-      <Color />
+      <Color
+        inputRef={colorInputRef}
+        attribute={elementAttributes.fill}
+        placeholder='color'
+        attributeType='fill'
+        handleInputChange={handleInputChange}
+      />
+      <Color
+        inputRef={colorInputRef}
+        attribute={elementAttributes.stroke}
+        placeholder='stroke'
+        attributeType='stroke'
+        handleInputChange={handleInputChange}
+      />
 
       <Export />
     </section>
