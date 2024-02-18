@@ -8,7 +8,6 @@ type Props = {
   value: string;
 };
 
-
 const FlyingReaction = ({ x, y, timestamp, value }: Props) => {
   return (
     <>
