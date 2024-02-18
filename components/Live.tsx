@@ -148,6 +148,18 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
       message: null,
     });
 
+  }, []);
+
+  const handlePointerDown = useCallback((event: React.PointerEvent) => {
+
+  }, [cursorState.mode, setCursorState]);
+
+  const handlePointerUp = useCallback(() => {
+
+  }, [cursorState.mode, setCursorState]);
+
+  const handleContextMenuClick = useCallback((key: string) => {
+
   }, [])
 
   return (
@@ -156,7 +168,13 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         <ContextMenuTrigger 
           className='relative flex h-full w-full flex-1 items-center justify-center'
           id='canvas'
+          style={{
+            cursor: cursorState.mode === CursorMode.Chat ? "none" : "auto",
+          }}
           onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
         >
           <canvas ref={canvasRef} />
 
