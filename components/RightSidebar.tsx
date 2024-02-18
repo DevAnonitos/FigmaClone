@@ -1,6 +1,5 @@
-"use client";
 
-import React from 'react';
+import React, { useMemo, useRef } from 'react';
 import { 
   Color, 
   Dimensions, 
@@ -8,7 +7,18 @@ import {
   Export 
 } from './settings';
 
-const RightSidebar = () => {
+import { RightSidebarProps } from '@/types/type';
+
+import { bringElement, modifyShape } from '@/lib/shapes';
+
+const RightSidebar = ({ 
+  elementAttributes,
+  setElementAttributes,
+  fabricRef,
+  activeObjectRef,
+  isEditingRef,
+  syncShapeInStorage,
+}: RightSidebarProps) => {
 
   
   return (
