@@ -12,6 +12,19 @@ import { ActiveElement, Attributes } from '@/types/type';
 
 import { handleDelete, handleKeyDown } from '@/lib/key-events';
 
+import { 
+  handleCanvasMouseDown,
+  handleCanvasMouseMove,
+  handleCanvasMouseUp,
+  handleCanvasObjectMoving,
+  handleCanvasObjectScaling,
+  handleCanvasZoom,
+  handleCanvasSelectionCreated,
+  handleResize,
+  initializeFabric,
+  renderCanvas,
+} from '@/lib/canvas'; 
+
 const Home = () => {
 
   const undo = useUndo();

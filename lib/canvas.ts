@@ -59,6 +59,13 @@ export const handleCanvasMouseUp = ({
 
 };
 
+export const handleCanvasObjectModified = ({ 
+  options,
+  syncShapeInStorage,
+}: CanvasObjectModified) => {
+  
+};
+
 export const handleCanvasObjectMoving = ({ 
   options,
 }: { options: fabric.IEvent }) => {
