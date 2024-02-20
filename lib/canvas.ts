@@ -151,14 +151,34 @@ export const handleCanvasMouseUp = ({
   syncShapeInStorage,
   setActiveElement,
 }: CanvasMouseUp) => {
+  if(selectedShapeRef.current === "freeform") return;
 
+  syncShapeInStorage(shapeRef.current);
+
+  shapeRef.current = null;
+  activeObjectRef.current = null;
+  selectedShapeRef.current = null;
+
+  if(!canvas.isDrawingMode) {
+    setTimeout(() => {
+      setActiveElement(defaultNavElement);
+    }, 700)
+  }
 };
 
 export const handleCanvasObjectModified = ({ 
   options,
   syncShapeInStorage,
 }: CanvasObjectModified) => {
-  
+  const target = options.target;
+
+  if(!target) return;
+
+  if(target?.type =="activeSelection") {
+
+  }else {
+    syncShapeInStorage(target);
+  }
 };
 
 export const handleCanvasObjectMoving = ({ 
