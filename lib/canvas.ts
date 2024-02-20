@@ -181,6 +181,20 @@ export const handleCanvasObjectModified = ({
   }
 };
 
+export const handlePathCreated = ({ 
+  options,
+  syncShapeInStorage
+}: CanvasPathCreated) => {
+  const path = options.path;
+  if(!path) return;
+
+  path.set({
+    objectId: uuidv4(),
+  });
+
+  syncShapeInStorage(path);
+};
+
 export const handleCanvasObjectMoving = ({ 
   options,
 }: { options: fabric.IEvent }) => {
