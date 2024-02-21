@@ -90,6 +90,52 @@ const Home = () => {
     canvasObjects.set(objectId, shapeData);
   }, []);
 
+  const handleActiveElement = (elem: ActiveElement) => {
+    setActiveElement(elem);
+
+    switch (elem?.value) {
+      // delete all the shapes from the canvas
+      case "reset":
+        // clear the storage
+        deleteAllShapes();
+        // clear the canvas
+        fabricRef.current?.clear();
+        // set "select" as the active element
+        setActiveElement(defaultNavElement);
+        break;
+
+      
+      case "delete":
+        
+        handleDelete(fabricRef.current as any, deleteShapeFromStorage);
+        
+        setActiveElement(defaultNavElement);
+        break;
+
+      
+      case "image":
+        
+        imageInputRef.current?.click();
+        
+        isDrawing.current = false;
+
+        if (fabricRef.current) {
+          
+          fabricRef.current.isDrawingMode = false;
+        }
+        break;
+
+      
+      case "comments":
+        break;
+
+      default:
+        
+        selectedShapeRef.current = elem?.value as string;
+        break;
+    }
+  };
+
   
   return (
     <>
@@ -108,9 +154,10 @@ const Home = () => {
               syncShapeInStorage,
             });
           }}
+          handleActiveElement={handleActiveElement}
         />
         <section className='flex h-full flex-row'>
-          <LeftSidebar />
+          <LeftSidebar allShapes={Array.from(canvasObjects)} />
 
           <Live canvasRef={canvasRef} undo={undo} redo={redo} />
 
