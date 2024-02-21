@@ -7,6 +7,7 @@ import { useMutation, useRedo, useStorage, useUndo } from '@/liveblocks.config';
 import { LeftSidebar, Navbar, RightSidebar } from '@/components/index';
 
 // Type || libs
+import { handleImageUpload } from '@/lib/shapes';
 import { defaultNavElement } from '@/constants';
 import { ActiveElement, Attributes } from '@/types/type';
 
@@ -21,6 +22,7 @@ import {
   handleCanvasZoom,
   handleCanvasSelectionCreated,
   handleResize,
+  handlePathCreated,
   initializeFabric,
   renderCanvas,
 } from '@/lib/canvas'; 
@@ -95,13 +97,31 @@ const Home = () => {
         <Navbar 
           imageInputRef={imageInputRef}
           activeElement={activeElement}
+          handleImageUpload={(e: any) => {
+            e.stopPropagation();
+            
+            handleImageUpload({
+              file: e.target.files[0],
+              canvas: fabricRef as any,
+              // @ts-ignore
+              shapeRef,
+              syncShapeInStorage,
+            });
+          }}
         />
         <section className='flex h-full flex-row'>
           <LeftSidebar />
 
           <Live canvasRef={canvasRef} undo={undo} redo={redo} />
 
-          <RightSidebar />
+          <RightSidebar
+            elementAttributes={elementAttributes}
+            setElementAttributes={setElementAttributes}
+            fabricRef={fabricRef}
+            isEditingRef={isEditingRef}
+            activeObjectRef={activeObjectRef}
+            syncShapeInStorage={syncShapeInStorage}
+          />
         </section>
       </main>
     </>
