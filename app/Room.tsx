@@ -15,7 +15,7 @@ export function Room({ children }: { children: ReactNode }) {
         canvasObjects: new LiveMap(),
       }}
     >
-      <ClientSideSuspense fallback={<div><Loader /></div>}>
+      <ClientSideSuspense fallback={<Loader />}>
         {() => children}
       </ClientSideSuspense>
     </RoomProvider>
