@@ -43,7 +43,7 @@ const OverlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
           transform: `translate(${thread.metadata.x})px, ${thread.metadata.y}px`,
         }}
       >
-        
+        <PinnedThread thread={thread} onFocus={handleIncreaseZIndex} />
       </div>
     </>
   );
