@@ -5,6 +5,7 @@ import { ThreadData } from '@liveblocks/client';
 import { useMaxIndex } from '@/lib/useMaxZIndex';
 
 import PinnedThread from './PinnedThread';
+
 import { 
   ThreadMetadata, 
   useEditThreadMetadata, 
@@ -17,7 +18,21 @@ type OverplayThreadProps = {
   maxZIndex: number;
 };
 
-const overlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
+const OverlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
+
+  const editThreadMetadata = useEditThreadMetadata();
+
+  const { isLoading } = useUser(thread.comments[0].userId);
+
+  const threadRef = useRef<HTMLDivElement>(null);
+
+  const handleIncreaseZIndex = useCallback(() => {
+
+  }, [thread, editThreadMetadata, maxZIndex]);
+
+  if(isLoading) {
+    return null;
+  }
 
   return (
     <>
@@ -41,7 +56,13 @@ const CommentsOverlay = () => {
   
   return (
     <div>
-      
+      {threads.filter((thread) => !thread.metadata.resolved).map((thread) => (
+        <OverlayThread
+          key={thread.id}
+          thread={thread}
+          maxZIndex={maxIndex}
+        />
+      ))}
     </div>
   );
 };
