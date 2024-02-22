@@ -20,6 +20,20 @@ const ActiveUsers = () => {
           {currentUser && (
             <Avatar name='You' otherStyles='border-[3px] border-primary-green' />
           )}
+
+          {others.slice(0, 2).map(({ connectionId }) => (
+            <Avatar
+              key={connectionId}
+              name={generateRandomName()}
+              otherStyles='-ml-3'
+            />
+          ))}
+
+          {hasMoreUsers && (
+            <div className='z-10 -ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-primary-black'>
+              +{others.length - 2}
+            </div>
+          )}
         </div>
       </>
     );
