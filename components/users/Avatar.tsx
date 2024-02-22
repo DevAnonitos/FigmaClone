@@ -16,7 +16,12 @@ const Avatar = ({ name, otherStyles }: Props) => {
             className={`relative h-9 w-9 rounded-full ${otherStyles}`} 
             data-tooltip={name}
           >
-
+            <Image
+              src={`https://liveblocks.io`}
+              fill
+              className='rounded-full'
+              alt={name}
+            />
           </div>
         </TooltipTrigger>
         <TooltipContent className='border-none bg-primary-grey-200 px-2 py-1.5 text-xs
