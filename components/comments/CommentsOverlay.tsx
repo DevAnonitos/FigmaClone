@@ -27,7 +27,16 @@ const OverlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
   const threadRef = useRef<HTMLDivElement>(null);
 
   const handleIncreaseZIndex = useCallback(() => {
+    if(maxZIndex === thread.metadata.zIndex){
+      return;
+    }
 
+    editThreadMetadata({
+      threadId: thread.id,
+      metadata: {
+        zIndex: maxZIndex + 1,
+      },
+    }); 
   }, [thread, editThreadMetadata, maxZIndex]);
 
   if(isLoading) {
@@ -36,7 +45,8 @@ const OverlayThread = ({ thread, maxZIndex }: OverplayThreadProps) => {
 
   return (
     <>
-      <div 
+      <div
+        ref={threadRef}
         className='absolute left-0 top-0 flex gap-5' 
         id={`thread-${thread.id}`}
         style={{
