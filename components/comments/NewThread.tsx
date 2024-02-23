@@ -38,12 +38,22 @@ const NewThread = ({ children }: Props) => {
 
 
 
+  const handleComposerSubmit = useCallback(() => {
+
+  }, [createThread, composerCoords, maxZIndex]);
+
   return (
     <>
-      <Slot>
+      <Slot
+        style={{ opacity: creatingCommentState !== "complete" ? 0.7 : 1 }}
+        onClick={() => 
+          setCreatingCommentState(
+            creatingCommentState !== "complete" ? "complete": "placing"
+        )}
+      >
         {children}
       </Slot>
-      {composerCoords ? (
+      {composerCoords && creatingCommentState === "placed" ? (
         <>
           <Portal.Root 
             className='absolute left-0 top-0' 
@@ -52,10 +62,12 @@ const NewThread = ({ children }: Props) => {
               transform: `translate(${composerCoords.x}px, ${composerCoords.y}px)`
             }}
           >
-
+            <PinnedComposer onComposerSubmit={handleComposerSubmit} />
           </Portal.Root>
         </>
       ) : null}
+
+      <NewThreadCursor display={creatingCommentState === "placing"} />
     </>
   );
 };

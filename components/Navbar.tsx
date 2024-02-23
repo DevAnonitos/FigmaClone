@@ -50,7 +50,7 @@ const Navbar = ({
                 </>
               ): item?.value === "comments" ? (
                 <>
-                  {/* <NewThread> */}
+                  <NewThread>
                     <Button className='relative w-5 h-5 object-contain'>
                       <Image
                         src={item.icon}
@@ -59,7 +59,7 @@ const Navbar = ({
                         className={isActive(item.value) ? "invert": ""}
                       />
                     </Button>
-                  {/* </NewThread> */}
+                  </NewThread>
                 </>
               ): (
                 <>
