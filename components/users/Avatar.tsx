@@ -17,7 +17,7 @@ const Avatar = ({ name, otherStyles }: Props) => {
             data-tooltip={name}
           >
             <Image
-              src={`https://liveblocks.io`}
+              src={`https://liveblocks.io/avatars/avatar-${Math.floor(Math.random() * 30)}.png`}
               fill
               className='rounded-full'
               alt={name}
