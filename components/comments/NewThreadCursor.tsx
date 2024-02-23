@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import * as Portal from "@radix-ui/react-portal";
 
 
@@ -12,6 +12,20 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
     x: DEFAULT_CURSOR_POSITION,
     y: DEFAULT_CURSOR_POSITION,
   });
+
+  useEffect(() => {
+    const updatePosition = (e: MouseEvent) => {
+
+    };
+
+    document.addEventListener("mousemove", updatePosition, false);
+    document.addEventListener("mouseenter", updatePosition, false);
+
+    return () => {
+      document.removeEventListener("mousemove", updatePosition);
+      document.removeEventListener("mouseenter", updatePosition);
+    };
+  }, []);
 
   return (
     <>
