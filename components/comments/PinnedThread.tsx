@@ -45,7 +45,13 @@ const PinnedThread = ({ thread, onFocus, ...props }: Props) => {
           rounded-tr-full bg-white shadow'
           data-draggable={true}
         >
-
+          <Image
+            src={`https://liveblocks.io/avatars/avatar-${Math.floor(Math.random() * 30)}.png`}
+            alt='Dummy Image'
+            width={28}
+            height={28}
+            className='rounded-full'
+          />
         </div>
         {!minimized ? (
           <>
@@ -65,7 +71,7 @@ const PinnedThread = ({ thread, onFocus, ...props }: Props) => {
         ): null}
       </div>
     </>
-  ), [thread.comments.length]);
+  ), [thread.comments.length, minimized]);
 
   return <>{memoizedContent}</>
 };
