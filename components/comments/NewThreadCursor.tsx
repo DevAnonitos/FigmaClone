@@ -15,7 +15,30 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
 
   useEffect(() => {
     const updatePosition = (e: MouseEvent) => {
+      const canvas = document.getElementById("canvas");
 
+      if(canvas) {
+        const canvasRect = canvas.getBoundingClientRect();
+
+        if(
+          e.clientX < canvasRect.left ||
+          e.clientX > canvasRect.right ||
+          e.clientY < canvasRect.top ||
+          e.clientY > canvasRect.bottom
+        ) {
+          setCoords({
+            x: DEFAULT_CURSOR_POSITION,
+            y: DEFAULT_CURSOR_POSITION,
+          });
+
+          return;
+        }
+      }
+
+      setCoords({
+        x: e.clientX,
+        y: e.clientY,
+      });
     };
 
     document.addEventListener("mousemove", updatePosition, false);
@@ -26,6 +49,14 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
       document.removeEventListener("mouseenter", updatePosition);
     };
   }, []);
+
+  useEffect(() => {
+    if(display) {
+      document.documentElement.classList.add("hide-cursor");
+    }else {
+      document.documentElement.classList.remove("hide-cursor");
+    }
+  }, [display]);
 
   return (
     <>
