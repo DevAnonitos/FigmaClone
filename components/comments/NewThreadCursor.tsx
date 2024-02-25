@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Portal from "@radix-ui/react-portal";
 
 
@@ -57,6 +57,10 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
       document.documentElement.classList.remove("hide-cursor");
     }
   }, [display]);
+
+  if(!display) {
+    return null;
+  }
 
   return (
     <>
