@@ -47,6 +47,30 @@ const NewThread = ({ children }: Props) => {
 
     const newComment = (e: MouseEvent) => {
       e.preventDefault();
+
+      if(creatingCommentState === "placed") {
+        
+        const isClickOnComposer = ((e as any)._savedComposedPath = e
+        .composedPath()
+        .some((el: any) => {
+          return el.classList?.contains("lb-composer-editor-actions");
+        }));
+
+        if(isClickOnComposer) {
+          return;
+        }
+
+        if(!isClickOnComposer) {
+          setCreatingCommentState("complete");
+          return;
+        }
+      }
+
+      setCreatingCommentState("placed");
+      setComposerCoords({
+        x: e.clientX,
+        y: e.clientY,
+      });
     };
 
     document.documentElement.addEventListener("click", newComment);
@@ -100,6 +124,30 @@ const NewThread = ({ children }: Props) => {
   const handleComposerSubmit = useCallback(({ body }: ComposerSubmitComment, event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
+
+    const overlayPanel = document.querySelector("#canvas");
+
+    if(!composerCoords || !lastPointerEvent.current || !overlayPanel) {
+      return;
+    }
+
+    const { top, left } = overlayPanel.getBoundingClientRect();
+    const x = composerCoords.x  - left;
+    const y = composerCoords.y - top;
+
+    createThread({
+      body,
+      metadata: {
+        x,
+        y,
+        resolved: false,
+        zIndex: maxZIndex + 1,
+      },
+    });
+
+    setComposerCoords(null);
+    setCreatingCommentState("complete");
+    setAllowUseComposer(false); 
 
   }, [createThread, composerCoords, maxZIndex]);
 
