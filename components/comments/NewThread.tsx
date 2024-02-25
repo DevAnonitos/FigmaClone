@@ -36,9 +36,70 @@ const NewThread = ({ children }: Props) => {
 
   const lastPointerEvent = useRef<PointerEvent>();
 
+  const [allowUseComposer, setAllowUseComposer] = useState(false);
+  const allowComposerRef = useRef(allowUseComposer);
+  allowComposerRef.current = allowUseComposer;
+
+  useEffect(() => {
+    if(creatingCommentState === "complete") {
+      return;
+    }
+
+    const newComment = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    document.documentElement.addEventListener("click", newComment);
+
+    return () => {
+      document.documentElement.removeEventListener("click", newComment);
+    };
+  }, [creatingCommentState]);
 
 
-  const handleComposerSubmit = useCallback(() => {
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      (e as any)._saveComposedPath = e.composedPath();
+      lastPointerEvent.current = e;
+    };
+
+    document.documentElement.addEventListener("pointermove", handlePointerMove);
+
+    return () => {
+      document.documentElement.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    if(creatingCommentState !== "placing") {
+      return;
+    }
+
+    const handlePointerDown = (e: PointerEvent) => {
+      if(allowComposerRef.current) {
+        return;
+      }
+
+      (e as any)._saveComposedPath = e.composedPath();
+      lastPointerEvent.current = e;
+      setAllowUseComposer(true);
+    };
+
+    const handleContextMenu = (e: Event) => {
+      if(creatingCommentState === "placing") {
+        e.preventDefault();
+        setCreatingCommentState("complete");
+      }
+    };
+
+    document.documentElement.addEventListener("pointerdown", handlePointerDown);
+    document.documentElement.addEventListener("contextmenu", handleContextMenu);
+  }, [creatingCommentState]);
+
+
+  const handleComposerSubmit = useCallback(({ body }: ComposerSubmitComment, event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
 
   }, [createThread, composerCoords, maxZIndex]);
 
