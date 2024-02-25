@@ -19,7 +19,7 @@ const Avatar = ({ name, otherStyles }: Props) => {
             <Image
               src={`https://liveblocks.io/avatars/avatar-${Math.floor(Math.random() * 30)}.png`}
               fill
-              className='rounded-full'
+              className='rounded-full border-[1px] border-gray-700'
               alt={name}
             />
           </div>
