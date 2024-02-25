@@ -5,7 +5,7 @@ import {
   CustomFabricObject, 
   ElementDirection, 
   ImageUpload, 
-  ModifyShape 
+  ModifyShape, 
 } from "@/types/type";
 
 export const createRectangle = (pointer: PointerEvent) => {

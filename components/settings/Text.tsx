@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   fontFamilyOptions, 
   fontSizeOptions, 
-  fontWeightOptions 
+  fontWeightOptions, 
 } from '@/constants';
 
 import { 
@@ -10,7 +10,7 @@ import {
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
-  SelectValue 
+  SelectValue, 
 } from '../ui/select';
 
 // Text Props
