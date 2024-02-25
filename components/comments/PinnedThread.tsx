@@ -22,8 +22,8 @@ const PinnedThread = ({ thread, onFocus, ...props }: Props) => {
   const memoizedContent = useMemo(() => (
     <>
       <div 
-        className='absolute flex cursor-pointer gap-4' 
         {...props}
+        className='absolute flex cursor-pointer gap-4' 
         onClick={(e: any) => {
           onFocus(thread.id);
 
