@@ -151,6 +151,7 @@ export const handleCanvasMouseUp = ({
   syncShapeInStorage,
   setActiveElement,
 }: CanvasMouseUp) => {
+  isDrawing.current  = false;
   if(selectedShapeRef.current === "freeform") return;
 
   syncShapeInStorage(shapeRef.current);
@@ -198,7 +199,31 @@ export const handlePathCreated = ({
 export const handleCanvasObjectMoving = ({ 
   options,
 }: { options: fabric.IEvent }) => {
+  const target = options.target as fabric.Object;
 
+  const canvas = target.canvas as fabric.Canvas;
+
+  target.setCoords();
+
+  if(target && target.left) {
+    target.left = Math.max(
+      0,
+      Math.min(
+        target.left,
+        (canvas.width || 0) - (target.getScaledWidth() || target.width || 0),
+      ),
+    );
+  }
+
+  if(target && target.top) {
+    target.top = Math.max(
+      0,
+      Math.min(
+        target.top,
+        (canvas.height || 0) - (target.getScaledHeight() || target.height || 0),
+      ),
+    );
+  }
 };
 
 export const handleCanvasSelectionCreated = ({ 
@@ -206,7 +231,38 @@ export const handleCanvasSelectionCreated = ({
   isEditingRef,
   setElementAttributes,
 }: CanvasSelectionCreated) => {
+  if(isEditingRef) {
+    return;
+  }
 
+  if(!options?.selected) {
+    return;
+  }
+
+  const selectedElement = options?.selected[0] as fabric.Object;
+
+  if(selectedElement && options.selected.length ===1) {
+    const scaledWidth = selectedElement?.scaleX
+    ? selectedElement?.width! * selectedElement?.scaleX
+    : selectedElement?.width;
+
+  const scaledHeight = selectedElement?.scaleY
+    ? selectedElement?.height! * selectedElement?.scaleY
+    : selectedElement?.height;
+
+    setElementAttributes({
+      width: scaledWidth?.toFixed(0).toString() || "",
+      height: scaledHeight?.toFixed(0).toString() || "",
+      fill: selectedElement?.fill?.toString() || "",
+      stroke: selectedElement?.stroke || "",
+      // @ts-ignore
+      fontSize: selectedElement?.fontSize || "",
+      // @ts-ignore
+      fontFamily: selectedElement?.fontFamily || "",
+      // @ts-ignore
+      fontWeight: selectedElement?.fontWeight || "",
+    });
+  }
 };
 
 export const handleCanvasObjectScaling = ({ 
