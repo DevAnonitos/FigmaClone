@@ -269,7 +269,21 @@ export const handleCanvasObjectScaling = ({
   options,
   setElementAttributes,
 }: CanvasObjectScaling) => {
+  const selectedElement = options.target;
 
+  const scaledWidth = selectedElement?.scaleX
+    ? selectedElement?.width! * selectedElement?.scaleX
+    : selectedElement?.width;
+
+  const scaledHeight = selectedElement?.scaleY
+    ? selectedElement?.height! * selectedElement?.scaleY
+    : selectedElement?.height;
+
+  setElementAttributes((prev) => ({
+    ...prev,
+    width: scaledWidth?.toFixed(0).toString() || "",
+    height: scaledHeight?.toFixed(0).toString() || "",
+  }));
 };
 
 export const renderCanvas = ({ 
@@ -277,7 +291,43 @@ export const renderCanvas = ({
   canvasObjects,
   activeObjectRef,
 }: RenderCanvas) => {
-  
+  fabricRef.current?.clear();
+
+  Array.from(canvasObjects, ([objectId, objectData]) => {
+    /**
+     * enlivenObjects() is used to render objects on canvas.
+     * It takes two arguments:
+     * 1. objectData: object data to render on canvas
+     * 2. callback: callback function to execute after rendering objects
+     * on canvas
+     *
+     * enlivenObjects: http://fabricjs.com/docs/fabric.util.html#.enlivenObjectEnlivables
+     */
+    fabric.util.enlivenObjects(
+      [objectData],
+      (enlivenedObjects: fabric.Object[]) => {
+        enlivenedObjects.forEach((enlivenedObj) => {
+          // if element is active, keep it in active state so that it can be edited further
+          if (activeObjectRef.current?.objectId === objectId) {
+            fabricRef.current?.setActiveObject(enlivenedObj);
+          }
+
+          // add object to canvas
+          fabricRef.current?.add(enlivenedObj);
+        });
+      },
+      /**
+       * specify namespace of the object for fabric to render it on canvas
+       * A namespace is a string that is used to identify the type of
+       * object.
+       *
+       * Fabric Namespace: http://fabricjs.com/docs/fabric.html
+       */
+      "fabric"
+    );
+  });
+
+  fabricRef.current?.renderAll();
 };
 
 export const handleResize = ({ 
