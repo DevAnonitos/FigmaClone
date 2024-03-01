@@ -335,7 +335,14 @@ export const handleResize = ({
 }: { 
   canvas: fabric.Canvas | null 
 }) => {
+  // const canvasElement = document.getElementById("canvas");
 
+  // if(!canvas) return;
+
+  // canvas.setDimensions({
+  //   width: canvasElement.clientWidth,
+  //   height: canvasElement.clientHeight,
+  // })
 };
 
 export const handleCanvasZoom = ({ 
