@@ -1,15 +1,22 @@
+"use client";
+
 import { createClient, LiveMap } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
+
   
 const client = createClient({
   publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!,
   throttle: 16,
-  // ts-ignore
-  async resolveUsers({ userIds }) {
-    // ...
+
+  resolveUsers: async ({ userIds }) => {
+    
+    return [];
   },
-  async resolveMentionSuggestions({ text }) {
-    // ...
+
+  // Find a list of users that match the current search term
+  resolveMentionSuggestions: async ({ text }) => {
+
+      return [];
   },
 });
 
