@@ -12,7 +12,7 @@
     "@liveblocks/client": "^1.10.2",
     "@liveblocks/node": "^1.10.2",
     "@liveblocks/react": "^1.10.2",
-    "@liveblocks/react-comments": "^1.10.2",
+    "@liveblocks/react-comments": "^1.11.1",
     "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-context-menu": "^2.1.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
