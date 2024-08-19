@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@liveblocks/client": "^2.3.0",
+    "@liveblocks/client": "^2.5.1",
     "@liveblocks/node": "^2.4.0",
     "@liveblocks/react": "^2.4.0",
     "@liveblocks/react-comments": "^1.12.0",
