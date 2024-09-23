@@ -11,7 +11,7 @@
   "dependencies": {
     "@liveblocks/client": "^2.5.1",
     "@liveblocks/node": "^2.4.0",
-    "@liveblocks/react": "^2.4.0",
+    "@liveblocks/react": "^2.7.2",
     "@liveblocks/react-comments": "^1.12.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-context-menu": "^2.2.1",
