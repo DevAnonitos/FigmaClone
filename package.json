@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@liveblocks/client": "^2.5.1",
-    "@liveblocks/node": "^2.4.0",
+    "@liveblocks/node": "^2.10.2",
     "@liveblocks/react": "^2.9.1",
     "@liveblocks/react-comments": "^1.12.0",
     "@radix-ui/react-collapsible": "^1.1.0",
